@@ -7,6 +7,7 @@
 
 //#pragma once
 #include "arraylist.h"
+#include <string>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ ArrayList<T>::ArrayList(int s, const T& x) {
    m_max = s;
    m_size = s;
    m_data = new T[m_size];
-   for (int i = 0; i < m_size; i++{
+   for (int i = 0; i < m_size; i++){
       m_data[i] = x;
    }
 }
@@ -35,14 +36,17 @@ ArrayList<T>::~ArrayList() {
 template<typename T>
 ArrayList<T>::ArrayList(const ArrayList<T>& cpy) {
    this.m_size = cpy.m_size;
-   this.m_max = 
+   this.m_max = cpy.m_max;
+   for (int i = 0; i < m_size; i++) {
+      cpy.m_data[i] = m_data[i];
+   }
 }
 
 //operator=
-template<typename T>
+/*template<typename T>
 ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& rhs) {
-
-}
+   return rhs;
+}*/
 
 /*
    OTHER FUNCTIONS
@@ -54,10 +58,10 @@ int ArrayList<T>::size() const{
 }
 
 //accessor function for m_max
-template<typename T>
+/*template<typename T>
 int ArrayList<T>::max() const {
-   return this.m_max;
-}
+   return m_max;
+}*/
 
 //returns first element of the arraylist
 template<typename T>
@@ -70,7 +74,7 @@ template<typename T>
 T& ArrayList<T>::operator[](int i){
    if (i > m_max) {
       cout << "Array index out of bounds" << endl;
-      return m_errorobj;
+      return this.m_errorobj;
    }
    
    return m_data[i];
@@ -81,7 +85,7 @@ template<typename T>
 const T& ArrayList<T>::operator[](int i) const {
    if (i > m_max) {
       cout << "Array index out of bounds" << endl;
-      return m_errorobj;
+      return this.m_errorobj;
    }
 
    return m_data[i];
@@ -215,7 +219,7 @@ void ArrayList<T>::swap(int i, int k) {
 
 
    //look for elements at index i and index k
-   for (int h = 0; h < max_size; h++) {
+   for (int h = 0; h < m_size; h++) {
       
       //element at index i
       if (h == i) {
@@ -224,7 +228,7 @@ void ArrayList<T>::swap(int i, int k) {
       }
 
       //look for element at index k
-      for (int j = 0; j < max_size; j++) {
+      for (int j = 0; j < m_size; j++) {
          if (j == k) {
             holder_k = m_data[j];
             found_k = true;
@@ -283,3 +287,11 @@ void ArrayList<T>::reverse() {
    }
 }
 
+/*template<typename T>
+std::ostream& operator<< <> (std::ostream& out, const ArrayList<T>& alist) {
+   for (int i = 0; i < alist.m_size; i++) {
+      out << alist.m_data[i] << ", ";
+   }
+   return out;
+}
+*/
