@@ -197,7 +197,7 @@ public:
     */
 
     // Purpose: prints the ArrayList
-   friend std::ostream& operator<< <> (std::ostream& out,
+   friend std::ostream& operator<< (std::ostream& out,
       const ArrayList<T>& alist);
 };
 
@@ -205,7 +205,7 @@ public:
 
 // BONUS, BONUS, BONUS !!!
 // This is the function to pretty print the lists
-// -----------------  Friend Function to Print  -----------------
+// -----------------  Friend  Function to Print  -----------------
 // Purpose: prints an ArrayList
 template <typename T>
 std::ostream& operator<< (std::ostream& out, const ArrayList<T>& alist)

@@ -6,9 +6,9 @@
 ////////////////////////////////////////////////////////
 
 //#pragma once
-#include "arraylist.h"
+//#include "arraylist.h"
 #include <string.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 
 using namespace std;
 
@@ -44,10 +44,17 @@ ArrayList<T>::ArrayList(const ArrayList<T>& cpy) {
 }
 
 //operator=
-/*template<typename T>
+template<typename T>
 ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& rhs) {
-   return rhs;
-}*/
+   if (this != &rhs) {
+      m_size = rhs.m_size;
+      m_max = rhs.m_max;
+      for (int i = 0; i < m_size; i++) {
+         m_data[i] = rhs.m_data[i];
+      }
+   }
+   return *this;
+}
 
 /*
    OTHER FUNCTIONS
