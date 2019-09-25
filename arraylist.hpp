@@ -7,7 +7,8 @@
 
 //#pragma once
 #include "arraylist.h"
-#include <string>
+#include <string.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -35,8 +36,8 @@ ArrayList<T>::~ArrayList() {
 //copy constructor
 template<typename T>
 ArrayList<T>::ArrayList(const ArrayList<T>& cpy) {
-   this.m_size = cpy.m_size;
-   this.m_max = cpy.m_max;
+   cpy.m_size = m_size;
+   cpy.m_max = m_max;
    for (int i = 0; i < m_size; i++) {
       cpy.m_data[i] = m_data[i];
    }
@@ -54,7 +55,7 @@ ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& rhs) {
 //accessor function for m_size
 template<typename T>
 int ArrayList<T>::size() const{
-   return this.m_size;
+   return m_size;
 }
 
 //accessor function for m_max
@@ -74,7 +75,7 @@ template<typename T>
 T& ArrayList<T>::operator[](int i){
    if (i > m_max) {
       cout << "Array index out of bounds" << endl;
-      return this.m_errorobj;
+      return m_errobj;
    }
    
    return m_data[i];
@@ -85,7 +86,7 @@ template<typename T>
 const T& ArrayList<T>::operator[](int i) const {
    if (i > m_max) {
       cout << "Array index out of bounds" << endl;
-      return this.m_errorobj;
+      return m_errobj;
    }
 
    return m_data[i];
@@ -99,6 +100,7 @@ int ArrayList<T>::find(const T& x) const {
          return i;
       }
    }
+   return -1;
 }
 
 //clears array, deallocates the data and sets to NULL, m_size and m_max set to 0
@@ -251,8 +253,8 @@ void ArrayList<T>::append(const ArrayList<T>& alist) {
    int oldsize = m_size;
 
    //increase m_size and m_max
-   m_size = this.m_size + alist.m_size;
-   m_max = this.m_max + alist.m_max;
+   m_size = m_size + alist.m_size;
+   m_max = m_max + alist.m_max;
 
    //make new array of a larger size
    T newarray = new T[m_size];
