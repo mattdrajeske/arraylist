@@ -201,6 +201,16 @@ void ArrayList<T>::remove(int i) {
          newarray[k] = m_data[k + 1];
       }
    }
+
+   //delete old array
+   delete[] m_data;
+   m_data = NULL;
+
+   //change the data to match the new array
+   m_data = new T[m_size];
+   for (int i = 0; i < m_size; i++) {
+      m_data[i] = newarray[i];
+   }
 }
 
 //swap the indices of two elements in an array
