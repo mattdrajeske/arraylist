@@ -7,7 +7,7 @@
 
 //#pragma once
 //#include "arraylist.h"
-#include <string.h>
+#include <string>
 //#include <stdlib.h>
 
 using namespace std;
@@ -36,10 +36,11 @@ ArrayList<T>::~ArrayList() {
 //copy constructor
 template<typename T>
 ArrayList<T>::ArrayList(const ArrayList<T>& cpy) {
-   cpy.m_size = m_size;
-   cpy.m_max = m_max;
+   m_size = cpy.m_size;
+   m_max = cpy.m_max;
+   m_data = new T[m_size];
    for (int i = 0; i < m_size; i++) {
-      cpy.m_data[i] = m_data[i];
+      m_data[i] = cpy.m_data[i];
    }
 }
 
@@ -49,6 +50,7 @@ ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& rhs) {
    if (this != &rhs) {
       m_size = rhs.m_size;
       m_max = rhs.m_max;
+      m_data = new T[m_size];
       for (int i = 0; i < m_size; i++) {
          m_data[i] = rhs.m_data[i];
       }

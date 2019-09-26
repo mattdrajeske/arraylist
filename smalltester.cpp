@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include <string>
+//#include "arraylist.hpp"
 #include "arraylist.h"
 
 using namespace std;

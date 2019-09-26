@@ -197,7 +197,7 @@ public:
     */
 
     // Purpose: prints the ArrayList
-   friend std::ostream& operator<< (std::ostream& out,
+   friend std::ostream& operator<< <>(std::ostream& out,
       const ArrayList<T>& alist);
 };
 
