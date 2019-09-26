@@ -29,8 +29,10 @@ ArrayList<T>::ArrayList(int s, const T& x) {
 //destructor
 template<typename T>
 ArrayList<T>::~ArrayList() {
+   m_size = 0;
+   m_max = 0;
    delete[] m_data;
-   delete this;
+   m_data = NULL;
 }
 
 //copy constructor
@@ -76,15 +78,19 @@ int ArrayList<T>::max() const {
 //returns first element of the arraylist
 template<typename T>
 const T& ArrayList<T>::first() const{
+   if (m_size == 0) {
+      cout << "!-- ERROR : PANIC in ARRAYLIST.first()!!  (List is empty)" << endl;
+   }
+
    return m_data[0];
 }
 
 //overload for [] operator on left side
 template<typename T>
 T& ArrayList<T>::operator[](int i){
-   if (i > m_size) {
-      cout << "Array index out of bounds" << endl;
-      return m_errobj;
+   if (i > m_size || i < 0 || m_size == 0) {
+      cout << "!--ERROR : PANIC in ARRAYLIST!!.[](index out of bounds)" << endl;
+      //return m_errobj;
    }
    return m_data[i];
 }
@@ -93,7 +99,7 @@ T& ArrayList<T>::operator[](int i){
 template<typename T>
 const T& ArrayList<T>::operator[](int i) const {
    if (i > m_size) {
-      cout << "Array index out of bounds" << endl;
+      cout << "!-- ERROR : PANIC in ARRAYLIST!!.[]()  (index out of bounds)" << endl;
       return m_errobj;
    }
    return m_data[i];
@@ -154,6 +160,11 @@ void ArrayList<T>::insert_back(const T& x) {
 template<typename T>
 void ArrayList<T>::insert(const T& x, int i) {
 
+   if (i > m_size || i < 0 || m_size == 0) {
+      cout << "!-- ERROR : PANIC in ARRAYLIST!!.[]()  (index out of bounds)" << endl;
+      return;
+   }
+
    //new array one size larger than old array
    m_size++;
    T* newarray = new T[m_size];
@@ -175,7 +186,7 @@ void ArrayList<T>::insert(const T& x, int i) {
    //delete old array
    delete[] m_data;
    m_data = NULL;
-
+   
    //change the data to match the new array
    m_data = new T[m_size];
    for (int i = 0; i < m_size; i++) {
@@ -187,6 +198,11 @@ void ArrayList<T>::insert(const T& x, int i) {
 template<typename T>
 void ArrayList<T>::remove(int i) {
    
+   if (i > m_size || i < 0 || m_size == 0) {
+      cout << "!-- ERROR : PANIC in ARRAYLIST!!.remove()  (index out of bounds)" << endl;
+      return;
+   }
+
    //new array one size smaller than old array
    m_size--;
    T* newarray = new T[m_size];
@@ -216,10 +232,14 @@ void ArrayList<T>::remove(int i) {
 //swap the indices of two elements in an array
 template<typename T>
 void ArrayList<T>::swap(int i, int k) {
+   if (i > m_size || k > m_size || m_size == 0) {
+      cout << "!-- ERROR : PANIC in ARRAYLIST!!.swap()  (index out of bounds)" << endl;
+      return;
+   }
+     
    T temp = m_data[i];
    m_data[i] = m_data[k];
    m_data[k] = temp;
-
    
 }
 
@@ -235,7 +255,7 @@ void ArrayList<T>::append(const ArrayList<T>& alist) {
    m_max = m_max + alist.m_max;
 
    //make new array of a larger size
-   T newarray = new T[m_size];
+   T* newarray = new T[m_size];
 
    //fill new container array
    for (int i = 0; i < m_size; i++) {
