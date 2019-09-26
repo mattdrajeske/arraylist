@@ -160,7 +160,7 @@ void ArrayList<T>::insert(const T& x, int i) {
    m_max++;
 
    //fill array until index of new element, insert, then keep filling array
-   for (int k = 0; k < i; k++) {
+   for (int k = 0; k < m_size; k++) {
       if (k < i) {
          newarray[k] = m_data[k];         
       }
@@ -187,7 +187,7 @@ void ArrayList<T>::insert(const T& x, int i) {
 template<typename T>
 void ArrayList<T>::remove(int i) {
    
-   //new array one size larger than old array
+   //new array one size smaller than old array
    m_size--;
    T* newarray = new T[m_size];
    m_max--;
@@ -216,41 +216,11 @@ void ArrayList<T>::remove(int i) {
 //swap the indices of two elements in an array
 template<typename T>
 void ArrayList<T>::swap(int i, int k) {
+   T temp = m_data[i];
+   m_data[i] = m_data[k];
+   m_data[k] = temp;
+
    
-   //holders for elements
-   T elm_i;
-   T elm_k;
-   T holder;
-
-   //flags
-   bool found_i = false;
-   bool found_k = false;
-
-   //find element at i
-   for (int h = 0; h < m_size; h++) {
-      if (h == i) {
-         elm_i = m_data[h];
-         found_i = true;
-      }
-   }
-
-   //find element at k
-   for (int h = 0; h < m_size; h++) {
-      if (h == k) {
-         elm_k = m_data[h];
-         found_k = true;
-      }
-   }
-
-   //swap
-   for (int h = 0; h < m_size; h++) {
-      if (h == i && found_k) {
-         m_data[h] = elm_k;
-      }
-      if (h == k && found_i) {
-         m_data[h] = elm_i;
-      }
-   }
 }
 
 //add another array onto the end of an existing array
