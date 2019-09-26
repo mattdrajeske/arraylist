@@ -82,22 +82,20 @@ const T& ArrayList<T>::first() const{
 //overload for [] operator on left side
 template<typename T>
 T& ArrayList<T>::operator[](int i){
-   if (i > m_max) {
+   if (i > m_size) {
       cout << "Array index out of bounds" << endl;
       return m_errobj;
    }
-   
    return m_data[i];
 }
 
 //overload for [] operator on right side
 template<typename T>
 const T& ArrayList<T>::operator[](int i) const {
-   if (i > m_max) {
+   if (i > m_size) {
       cout << "Array index out of bounds" << endl;
       return m_errobj;
    }
-
    return m_data[i];
 }
 
@@ -209,47 +207,38 @@ void ArrayList<T>::remove(int i) {
 template<typename T>
 void ArrayList<T>::swap(int i, int k) {
    
-   //do nothing if k and i are the same
-   if (k == i) {
-      return;
-   }
+   //holders for elements
+   T elm_i;
+   T elm_k;
+   T holder;
 
-   //error handling
-   if (i > m_size || k > m_size || i < 0 || k < 0) {
-      cout << "Array index out of bounds";
-      return;
-   }
-
-   //holder variables for elements at indices i and k
-   T holder_i;
-   T holder_k;
-
-   //conditions for if elements at i and k have been found yet
+   //flags
    bool found_i = false;
    bool found_k = false;
 
-
-   //look for elements at index i and index k
+   //find element at i
    for (int h = 0; h < m_size; h++) {
-      
-      //element at index i
       if (h == i) {
-         holder_i = m_data[h];
+         elm_i = m_data[h];
          found_i = true;
       }
+   }
 
-      //look for element at index k
-      for (int j = 0; j < m_size; j++) {
-         if (j == k) {
-            holder_k = m_data[j];
-            found_k = true;
-         }
+   //find element at k
+   for (int h = 0; h < m_size; h++) {
+      if (h == k) {
+         elm_k = m_data[h];
+         found_k = true;
+      }
+   }
 
-         //do the swap if both elements have been found
-         if (found_i && found_k) {
-            m_data[j] = holder_i;
-            m_data[h] = holder_k;
-         }
+   //swap
+   for (int h = 0; h < m_size; h++) {
+      if (h == i && found_k) {
+         m_data[h] = elm_k;
+      }
+      if (h == k && found_i) {
+         m_data[h] = elm_i;
       }
    }
 }
