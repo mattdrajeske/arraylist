@@ -5,12 +5,12 @@
 ///Assignment 2
 ////////////////////////////////////////////////////////
 
-//#pragma once
-//#include "arraylist.h"
+
 #include <string>
 //#include <stdlib.h>
 
 using namespace std;
+
 
 //constructor for arraylist
 template<typename T>
@@ -154,6 +154,10 @@ void ArrayList<T>::insert_back(const T& x) {
    for (int i = 0; i < m_size; i++) {
       m_data[i] = newarray[i];
    }
+
+   //delete temp array
+   delete[] newarray;
+   newarray = NULL;
 }
 
 //inserts an element after a specified index
@@ -192,6 +196,10 @@ void ArrayList<T>::insert(const T& x, int i) {
    for (int i = 0; i < m_size; i++) {
       m_data[i] = newarray[i];
    }
+
+   //delete temp array
+   delete[] newarray;
+   newarray = NULL;
 }
 
 //remove an element from an array list
@@ -227,6 +235,10 @@ void ArrayList<T>::remove(int i) {
    for (int i = 0; i < m_size; i++) {
       m_data[i] = newarray[i];
    }
+
+   //delete temp array
+   delete[] newarray;
+   newarray = NULL;
 }
 
 //swap the indices of two elements in an array
@@ -277,21 +289,25 @@ void ArrayList<T>::append(const ArrayList<T>& alist) {
       m_data[i] = newarray[i];
    }
 
+   //delete temp array
+   delete[] newarray;
+   newarray = NULL;
+
 }
 
 //reverse the order of the elements in an array
 template<typename T>
 void ArrayList<T>::reverse() {
+   T temp = NULL;
    for (int i = 0; i < m_size/2; i++) {
-      m_data[i] = m_data[m_max - i];
+      temp = m_data[i];
+      m_data[i] = m_data[m_size - i];
+      m_data[m_size - i] = temp;
    }
+   //delete temp;
 }
 
-/*template<typename T>
-std::ostream& operator<< <> (std::ostream& out, const ArrayList<T>& alist) {
-   for (int i = 0; i < alist.m_size; i++) {
-      out << alist.m_data[i] << ", ";
-   }
-   return out;
-}
-*/
+
+
+
+
