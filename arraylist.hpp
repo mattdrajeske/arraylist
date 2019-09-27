@@ -7,10 +7,8 @@
 
 
 #include <string>
-//#include <stdlib.h>
 
 using namespace std;
-
 
 //constructor for arraylist
 template<typename T>
@@ -345,7 +343,7 @@ void ArrayList<T>::shrink() {
    m_max /= 2;
 
    //fill new array
-   for (int i = 0; i < sizeof(m_data); i++) {
+   for (int i = 0; i < m_size; i++) {
       newarray[i] = m_data[i];
    }
 
