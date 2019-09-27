@@ -88,7 +88,7 @@ const T& ArrayList<T>::first() const{
 template<typename T>
 T& ArrayList<T>::operator[](int i){
    if (i > m_size || i < 0 || m_size == 0) {
-      cout << "!--ERROR : PANIC in ARRAYLIST!!.[](index out of bounds)" << endl;
+      cout << "!-- ERROR : PANIC in ARRAYLIST!!.[](index out of bounds)" << endl;
       //return m_errobj;
    }
    return m_data[i];
