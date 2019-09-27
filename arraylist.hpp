@@ -164,7 +164,7 @@ void ArrayList<T>::insert_back(const T& x) {
 template<typename T>
 void ArrayList<T>::insert(const T& x, int i) {
 
-   if (i > m_size || i < 0 || m_size == 0) {
+   if (i > m_size || i < 0) {
       cout << "!-- ERROR : PANIC in ARRAYLIST!!.[]()  (index out of bounds)" << endl;
       return;
    }
@@ -206,7 +206,7 @@ void ArrayList<T>::insert(const T& x, int i) {
 template<typename T>
 void ArrayList<T>::remove(int i) {
    
-   if (i > m_size || i < 0 || m_size == 0) {
+   if (i > m_size || i < 0) {
       cout << "!-- ERROR : PANIC in ARRAYLIST!!.remove()  (index out of bounds)" << endl;
       return;
    }
@@ -244,7 +244,7 @@ void ArrayList<T>::remove(int i) {
 //swap the indices of two elements in an array
 template<typename T>
 void ArrayList<T>::swap(int i, int k) {
-   if (i > m_size || k > m_size || m_size == 0) {
+   if (i > m_size || k > m_size) {
       cout << "!-- ERROR : PANIC in ARRAYLIST!!.swap()  (index out of bounds)" << endl;
       return;
    }
@@ -298,13 +298,12 @@ void ArrayList<T>::append(const ArrayList<T>& alist) {
 //reverse the order of the elements in an array
 template<typename T>
 void ArrayList<T>::reverse() {
-   T temp = NULL;
-   for (int i = 0; i < m_size/2; i++) {
+   T temp; 
+   for (int i = 0; i < m_size / 2; i++) {
       temp = m_data[i];
-      m_data[i] = m_data[m_size - i];
-      m_data[m_size - i] = temp;
+      m_data[i] = m_data[m_size - i - 1];
+      m_data[m_size - i - 1] = temp;
    }
-   //delete temp;
 }
 
 
