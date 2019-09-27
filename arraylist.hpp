@@ -81,7 +81,6 @@ const T& ArrayList<T>::first() const{
    if (m_size == 0) {
       cout << "!-- ERROR : PANIC in ARRAYLIST.first()!!  (List is empty)" << endl;
    }
-
    return m_data[0];
 }
 
@@ -100,7 +99,7 @@ template<typename T>
 const T& ArrayList<T>::operator[](int i) const {
    if (i > m_size) {
       cout << "!-- ERROR : PANIC in ARRAYLIST!!.[]()  (index out of bounds)" << endl;
-      return m_errobj;
+      //return m_errobj;
    }
    return m_data[i];
 }
@@ -165,7 +164,7 @@ template<typename T>
 void ArrayList<T>::insert(const T& x, int i) {
 
    if (i > m_size || i < 0) {
-      cout << "!-- ERROR : PANIC in ARRAYLIST!!.[]()  (index out of bounds)" << endl;
+      cout << "!-- ERROR : PANIC in ARRAYLIST.insert()  (index out of bounds)" << endl;
       return;
    }
 
@@ -307,6 +306,62 @@ void ArrayList<T>::reverse() {
 }
 
 
+/*
+   AUXILIARY FUNCTIONS
+*/
+template<typename T>
+void ArrayList<T>::grow() {
+   
+   //multiply size and max by 2, create new array of size 2*m_size
+   m_size *= 2;
+   T newarray = new T[m_size];
+   m_max *= 2;
 
+   //fill new array
+   for (int i = 0; i < sizeof(m_data); i++) {
+      newarray[i] = m_data[i];
+   }
+
+   //delete old array
+   delete[] m_data;
+   m_data = NULL;
+
+   //change the data to match the new array
+   m_data = new T[m_size];
+   for (int i = 0; i < m_size; i++) {
+      m_data[i] = newarray[i];
+   }
+
+   //delete temp array
+   delete[] newarray;
+   newarray = NULL;
+}
+
+template<typename T>
+void ArrayList<T>::shrink() {
+   //divide size and max by 2, create new array of size m_size/2
+   m_size /= 2;
+   T newarray = new T[m_size];
+   m_max /= 2;
+
+   //fill new array
+   for (int i = 0; i < sizeof(m_data); i++) {
+      newarray[i] = m_data[i];
+   }
+
+   //delete old array
+   delete[] m_data;
+   m_data = NULL;
+
+   //change the data to match the new array
+   m_data = new T[m_size];
+   for (int i = 0; i < m_size; i++) {
+      m_data[i] = newarray[i];
+   }
+
+   //delete temp array
+   delete[] newarray;
+   newarray = NULL;
+}
 
 
